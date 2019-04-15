@@ -18,7 +18,7 @@ class WeiController extends Controller
         $content=file_get_contents("php://input");
         $time=date("Y-m-d H:i:s");
         $str=$time.$content.'\n';
-        file_put_contents("logs/check.log",$str,FILE_APPEND);exit;
+        file_put_contents("logs/check.log",$str,FILE_APPEND);
         $xmlObj=simplexml_load_string($content);
 
         //用户信息
