@@ -41,7 +41,7 @@ class WeiController extends Controller
                    'time'=>time()
                ];
           $CountInfo= DB::table('ks')->where('openid',$FromUserName)->count();
-           print_r($CountInfo);exit;
+           //print_r($CountInfo);exit;
            if($CountInfo=='0'){
                //echo 0;exit;
                 $where=[
@@ -52,7 +52,7 @@ class WeiController extends Controller
                 ];
                 DB::table('ks')->where($where)->update($data);
            }else{
-              // echo 1;exit;
+              //3399 echo 1;exit;
                 DB::table('ks')->insert($weiInfo);
               
            }
