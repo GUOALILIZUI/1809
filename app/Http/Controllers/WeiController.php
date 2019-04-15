@@ -30,7 +30,7 @@ class WeiController extends Controller
         $info=json_decode($response,true);
         //var_dump($info);exit;
         $name=$info['nickname'];
-
+        $time=time();
         //入库
         if($Event=='subscribe'){
          $weiInfo=[
@@ -38,23 +38,24 @@ class WeiController extends Controller
                    'sex'=>$info['sex'],
                    'img'=>$info['headimgurl'],
                    'openid'=>$info['openid'],
-                   'time'=>time()
+                   'time'=>$time
                ];
           $count= DB::table('ks')->where('openid',$FromUserName)->count();
            //print_r($CountInfo);exit;
            if($count=='0'){
                //echo 0;exit;
-                $where=[
+               DB::table('ks')->insert($weiInfo);
+
+                
+           }else{
+              //3399 echo 1;exit;
+              $where=[
                     'openid'=>$FromUserName
                 ];
                 $data=[
                     'time'=>time()
                 ];
                 DB::table('ks')->where($where)->update($data);
-           }else{
-              //3399 echo 1;exit;
-                DB::table('ks')->insert($weiInfo);
-              
            }
         }
     }
