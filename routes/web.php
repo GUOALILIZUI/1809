@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('weixin','WeiController@Info');
+Route::any('check','WeiController@check');
+Route::any('accessToken','WeiController@accessToken');
