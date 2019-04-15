@@ -99,8 +99,8 @@ class WeiController extends Controller
                         array(
                             "type"=>"pic_sysphoto",
                             "name"=>"拍照",
-                            "key": "rselfmenu_1_0", 
-                             "sub_button": [ ]
+                            "key"=>"rselfmenu_1_0", 
+                            "sub_button"=> [ ]
 
                         ),
 

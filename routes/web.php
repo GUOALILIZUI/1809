@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::any('weixin','WeiController@Info');
 Route::any('check','WeiController@check');
 Route::any('accessToken','WeiController@accessToken');
+Route::any('custom','WeiController@custom');
+
