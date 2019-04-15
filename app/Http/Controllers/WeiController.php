@@ -38,7 +38,7 @@ class WeiController extends Controller
                 'openid'=>$info['openid'],
                 'time'=>time()
             ];
-           DB::table('ks')->insert();
+           DB::table('ks')->insert($weiInfo);
         }
     }
 
