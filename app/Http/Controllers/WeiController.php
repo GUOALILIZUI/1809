@@ -14,7 +14,7 @@ class WeiController extends Controller
     //接口配置
     public function check(Request $request){
         //首次接入检测请求是否为微信
-        //echo $request->input('echostr');
+        echo $request->input('echostr');exit;
 
         $content=file_get_contents("php://input");
         $time=date("Y-m-d H:i:s");
@@ -72,8 +72,7 @@ class WeiController extends Controller
     }
 
     //一级菜单
-    public function custom()
-    {
+    public function custom(){
         $access = $this->accessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$access";
         $arr = array(
