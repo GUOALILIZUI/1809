@@ -52,7 +52,7 @@ class WeiController extends Controller
                 ];
                 DB::table('ks')->where($where)->update($data);
            }else{
-              // echo 1;exit;
+              //3399 echo 1;exit;
                 DB::table('ks')->insert($weiInfo);
               
            }
