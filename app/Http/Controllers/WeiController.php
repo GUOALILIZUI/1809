@@ -27,21 +27,31 @@ class WeiController extends Controller
         $url="https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access&openid=$FromUserName&lang=zh_CN";
         $response=file_get_contents($url);
         // print_r($response);exit;
-
         $info=json_decode($response,true);
         //var_dump($info);exit;
         $name=$info['nickname'];
 
         //入库
         if($Event=='subscribe'){
-            $weiInfo=[
-                'name'=>$name,
-                'sex'=>$info['sex'],
-                'img'=>$info['headimgurl'],
-                'openid'=>$info['openid'],
-                'time'=>time()
-            ];
-           DB::table('ks')->insert($weiInfo);
+            $CountInfo=DB::table('ks')->where(['openid'=>$FromUserName])->count();
+            if($CountInfo=='0'){
+                $weiInfo=[
+                    'name'=>$name,
+                    'sex'=>$info['sex'],
+                    'img'=>$info['headimgurl'],
+                    'openid'=>$info['openid'],
+                    'time'=>time()
+                ];
+                DB::table('ks')->insert($weiInfo);
+            }else{
+                $where=[
+                    'openid'=>$FromUserName
+                ];
+                $data=[
+                    'time'=>time()
+                ];
+                DB::table('ks')->where($where)->update($data);
+            }
         }
     }
 
@@ -66,7 +76,7 @@ class WeiController extends Controller
             //Redis::get($key);
             Redis::expire($key,3600);
             $token=$arr['access_token'];
-            //print_r($token);
+            print_r($token);
         }
         return $token;
 
@@ -74,7 +84,7 @@ class WeiController extends Controller
 
     }
 
-    //一级菜单
+    //自定义菜单
     public function custom(){
         $access = $this->accessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$access";
