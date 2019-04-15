@@ -33,14 +33,27 @@ class WeiController extends Controller
 
         //入库
         if($Event=='subscribe'){
-            $weiInfo=[
-                'name'=>$name,
-                'sex'=>$info['sex'],
-                'img'=>$info['headimgurl'],
-                'openid'=>$info['openid'],
-                'time'=>time()
-            ];
-           DB::table('ks')->insert($weiInfo);
+         $weiInfo=[
+                   'name'=>$name,
+                   'sex'=>$info['sex'],
+                   'img'=>$info['headimgurl'],
+                   'openid'=>$info['openid'],
+                   'time'=>time()
+               ];
+          $CountInfo= DB::table('ks')->where('openid',$FromUserName)->first();
+           print_r($CountInfo);exit;
+           if($CountInfo){
+                $where=[
+                    'openid'=>$FromUserName
+                ];
+                $data=[
+                    'time'=>time()
+                ];
+                DB::table('ks')->where($where)->update($data);
+           }else{
+                DB::table('ks')->insert($weiInfo);
+              
+           }
         }
     }
 
