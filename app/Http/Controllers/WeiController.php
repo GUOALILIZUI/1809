@@ -40,9 +40,9 @@ class WeiController extends Controller
                    'openid'=>$info['openid'],
                    'time'=>time()
                ];
-          $CountInfo= DB::table('ks')->where('openid',$FromUserName)->count();
+          $count= DB::table('ks')->where('openid',$FromUserName)->count();
            //print_r($CountInfo);exit;
-           if($CountInfo=='0'){
+           if($count=='0'){
                //echo 0;exit;
                 $where=[
                     'openid'=>$FromUserName
