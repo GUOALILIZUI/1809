@@ -21,7 +21,7 @@ class WeiController extends Controller
         file_put_contents("logs/check.log",$str,FILE_APPEND);
         $xmlObj=simplexml_load_string($content);
         $FromUserName=$xmlObj->FromUserName;
-
+        $Event=$xmlObj->Event;
         //用户信息
         $access=$this->accessToken();
         $url="https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access&openid=$FromUserName&lang=zh_CN";
