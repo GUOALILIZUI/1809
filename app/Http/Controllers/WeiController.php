@@ -40,9 +40,10 @@ class WeiController extends Controller
                    'openid'=>$info['openid'],
                    'time'=>time()
                ];
-          $CountInfo= DB::table('ks')->where('openid',$FromUserName)->first();
+          $CountInfo= DB::table('ks')->where('openid',$FromUserName)->count();
            print_r($CountInfo);exit;
-           if($CountInfo){
+           if($CountInfo=='0'){
+               echo 0;exit;
                 $where=[
                     'openid'=>$FromUserName
                 ];
@@ -51,6 +52,7 @@ class WeiController extends Controller
                 ];
                 DB::table('ks')->where($where)->update($data);
            }else{
+               echo 1;exit;
                 DB::table('ks')->insert($weiInfo);
               
            }
@@ -78,7 +80,7 @@ class WeiController extends Controller
             //Redis::get($key);
             Redis::expire($key,3600);
             $token=$arr['access_token'];
-            print_r($token);
+           // print_r($token);
         }
         return $token;
 
