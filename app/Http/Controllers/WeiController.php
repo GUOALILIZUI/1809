@@ -20,6 +20,7 @@ class WeiController extends Controller
         $str=$time.$content.'\n';
         file_put_contents("logs/check.log",$str,FILE_APPEND);
         $xmlObj=simplexml_load_string($content);
+        $FromUserName=$xmlObj->FromUserName;
 
         //用户信息
         $access=$this->accessToken();
